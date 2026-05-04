@@ -1,0 +1,6 @@
+streamlit
+yfinance
+gspread
+google-auth
+numpy
+matplotlib
