@@ -58,12 +58,11 @@ def go_to(screen):
 def validate_ticker(ticker_symbol): #Check if ticker exists in yfinance and return company name if found
     try:
         ticker = yf.Ticker(ticker_symbol)
-        info = ticker.info
-        name = info.get("longName") or info.get("shortName")
-        if name:
-            return True, name
-        else:
+        data = yf.download(ticker_symbol, period="5d", progress=False)
+        if data.empty:
             return False, None
+        name = ticker.info.get("longName") or ticker.info.get("shortName") or ticker_symbol
+        return True, name
     except Exception:
         return False, None
 
