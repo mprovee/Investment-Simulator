@@ -410,15 +410,44 @@ def show_stock_input_screen():
         }
         st.table(table_data)
 
+        # Pie Chart reflecting allocation
+        # ─────────────────────────────
+        st.subheader("Portfolio Allocation Chart")
+
+        labels = [s["ticker"] for s in st.session_state.stocks_list]
+        sizes = [s["amount"] for s in st.session_state.stocks_list]
+
+        fig2, ax2 = plt.subplots(figsize=(5, 5))
+
+        ax2.pie(
+            sizes,
+            labels=labels,
+            autopct="%1.1f%%",
+            startangle=90
+        )
+
+        ax2.axis("equal")  # Keeps pie chart circular
+        ax2.set_title("Current Allocation")
+
+        st.pyplot(fig2)
+
         #Functions + buttons to delete a stock or delete entire portfolio (Written by Group)
         col_del, col_clear = st.columns([2, 1])
+
         with col_del:
-            remove_ticker = st.selectbox("Select stock to delete:", [""] + [s["ticker"] for s in st.session_state.stocks_list])
+            remove_ticker = st.selectbox(
+                "Select stock to delete:",
+                [""] + [s["ticker"] for s in st.session_state.stocks_list]
+            )
+
         with col_clear:
             st.markdown("<br>", unsafe_allow_html=True)
+
             if st.button("Delete Stock") and remove_ticker:
-                #AI was consulted to fill out the next line
-                st.session_state.stocks_list = [s for s in st.session_state.stocks_list if s["ticker"] != remove_ticker]
+                st.session_state.stocks_list = [
+                    s for s in st.session_state.stocks_list
+                    if s["ticker"] != remove_ticker
+                ]
                 st.rerun()
 
         if st.button("Clear Portfolio"):
