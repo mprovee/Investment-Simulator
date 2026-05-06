@@ -534,6 +534,88 @@ def show_results_screen():
 # ─────────────────────────────────────────────
 st.set_page_config(page_title=app_title, layout="centered")
 
+st.markdown("""
+<style>
+
+    /* Change the background color of the whole app */
+    .stApp {
+        background-color: #1a1a2e;  /* dark navy blue */
+        color: #e0e0e0;             /* light grey text so it's readable */
+    }
+
+    /* Style the main page titles made with st.title() */
+    h1 {
+        color: #4fc3f7;             /* bright blue */
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    /* Style smaller headers made with st.subheader() or ### in markdown */
+    h2, h3 {
+        color: #90caf9;             /* lighter blue for subheadings */
+    }
+
+    /* Style all text input boxes (ticker, username, password, amount) */
+    .stTextInput > div > div > input {
+        background-color: #162032;  /* dark blue-grey box */
+        color: #ffffff;             /* white text inside the box */
+        border: 1px solid #4fc3f7;  /* blue outline around the box */
+        border-radius: 6px;         /* slightly rounded corners */
+    }
+
+    /* Style the number input box (simulation years) the same way */
+    .stNumberInput > div > div > input {
+        background-color: #162032;
+        color: #ffffff;
+        border: 1px solid #4fc3f7;
+        border-radius: 6px;
+    }
+
+    /* Style dropdown menus (stock search, delete stock) */
+    .stSelectbox > div > div {
+        background-color: #162032;
+        color: #ffffff;
+        border: 1px solid #4fc3f7;
+        border-radius: 6px;
+    }
+
+    /* Style the Run Simulation button (the primary button) */
+    .stButton > button[kind="primary"] {
+        background-color: #1565c0;  /* solid blue fill */
+        color: #ffffff;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        padding: 0.45rem 1.2rem;
+    }
+
+    /* Style all other buttons (Login, Add Stock, Back, etc.) */
+    .stButton > button {
+        background-color: transparent;   /* see-through background */
+        color: #4fc3f7;                  /* blue text */
+        border: 1px solid #4fc3f7;       /* blue border */
+        border-radius: 6px;
+    }
+
+    /* Style the leaderboard and portfolio tables */
+    thead tr th {
+        background-color: #1565c0 !important;   /* blue header row */
+        color: #ffffff !important;               /* white header text */
+    }
+    td {
+        color: #cfd8dc !important;   /* light grey cell text */
+    }
+
+    /* Style the divider line from st.markdown("---") */
+    hr {
+        border-top: 1px solid #4fc3f7;   /* thin blue line */
+    }
+
+</style>
+""", unsafe_allow_html=True)
+
+# ── END OF VISUAL DESIGN
+
 screen = st.session_state.screen
 if screen == "welcome":
     show_welcome_screen()
